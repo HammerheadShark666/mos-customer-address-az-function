@@ -23,7 +23,7 @@ public class AddCustomerAddressFromRegisteredUser(ILogger<AddCustomerAddressFrom
 
         try
         {               
-            _logger.LogInformation(string.Format("RegisteredUser - AddCustomer - {0}", addCustomerAddressRequest.Id.ToString()));
+            _logger.LogInformation(string.Format("RegisteredUser - AddCustomerAddress - {0}.", addCustomerAddressRequest.Id.ToString()));
              
             await _mediator.Send(addCustomerAddressRequest);
             await messageActions.CompleteMessageAsync(message);
