@@ -41,3 +41,22 @@ jobs:
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BDE6C936E0DE4E779F4F56CD784F8685 }}
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.x'
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Unit Tests
+        run: dotnet test Microservice.Customer.Address.Function.Test.Unit/Microservice.Customer.Address.Function.Test.Unit.csproj --logger "console;verbosity=detailed"
+  
