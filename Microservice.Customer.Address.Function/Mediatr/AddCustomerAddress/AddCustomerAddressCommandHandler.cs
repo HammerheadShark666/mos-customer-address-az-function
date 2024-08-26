@@ -12,7 +12,7 @@ public class AddCustomerAddressCommandHandler(ICustomerAddressRepository custome
 
     public async Task<AddCustomerAddressResponse> Handle(AddCustomerAddressRequest addCustomerAddressRequest, CancellationToken cancellationToken)
     {
-        var customerAddress = _mapper.Map<Domain.CustomerAddress>(addCustomerAddressRequest); 
+        var customerAddress = _mapper.Map<Domain.CustomerAddress>(addCustomerAddressRequest);
         await _customerAddressRepository.AddAsync(customerAddress);
 
         return new AddCustomerAddressResponse("Customer Added.");

@@ -1,6 +1,6 @@
 using FluentValidation;
 using MediatR;
-using Microservice.Customer.Address.Function.Data.Contexts;
+using Microservice.Customer.Address.Function.Data.Context;
 using Microservice.Customer.Address.Function.Data.Repository;
 using Microservice.Customer.Address.Function.Data.Repository.Interfaces;
 using Microservice.Customer.Address.Function.Helpers;
@@ -33,7 +33,7 @@ var host = new HostBuilder()
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
         services.AddAutoMapper(Assembly.GetAssembly(typeof(AddCustomerAddressMapper)));
         services.AddScoped<ICustomerAddressRepository, CustomerAddressRepository>();
-        services.AddScoped<ICountryRepository, CountryRepository>(); 
+        services.AddScoped<ICountryRepository, CountryRepository>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddMemoryCache();
 

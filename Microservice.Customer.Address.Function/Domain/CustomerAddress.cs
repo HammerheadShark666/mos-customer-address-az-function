@@ -14,7 +14,7 @@ public class CustomerAddress
 
     [MaxLength(50)]
     [Required]
-    public string AddressLine1 { get; set; }
+    public string AddressLine1 { get; set; } = string.Empty;
 
     [MaxLength(50)]
     public string? AddressLine2 { get; set; }
@@ -24,7 +24,7 @@ public class CustomerAddress
 
     [MaxLength(50)]
     [Required]
-    public string TownCity { get; set; }
+    public string TownCity { get; set; } = string.Empty;
 
     [MaxLength(50)]
     public string? County { get; set; }
@@ -35,7 +35,7 @@ public class CustomerAddress
     public int CountryId { get; set; }
 
     [Required]
-    public Country Country { get; set; }
+    public Country Country { get; set; } = default!;
 
     [Required]
     public DateTime Created { get; set; } = DateTime.Now;

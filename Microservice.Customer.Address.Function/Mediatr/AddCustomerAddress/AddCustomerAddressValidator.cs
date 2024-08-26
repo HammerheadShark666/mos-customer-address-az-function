@@ -1,4 +1,4 @@
-﻿using FluentValidation; 
+﻿using FluentValidation;
 using Microservice.Customer.Address.Function.Data.Repository.Interfaces;
 
 namespace Microservice.Customer.Address.Function.MediatR.AddCustomerAddress;
@@ -19,8 +19,8 @@ public class AddCustomerAddressValidator : AbstractValidator<AddCustomerAddressR
               .NotEmpty().WithMessage("Town/City is required.")
               .Length(1, 50).WithMessage("Town/City length is between 1 and 50.");
 
-        RuleFor(address => address.County) 
-              .MaximumLength(50).WithMessage("County length is between 1 and 50."); 
+        RuleFor(address => address.County)
+              .MaximumLength(50).WithMessage("County length is between 1 and 50.");
 
         RuleFor(address => address.Postcode)
               .NotEmpty().WithMessage("Postcode is required.")
@@ -30,11 +30,11 @@ public class AddCustomerAddressValidator : AbstractValidator<AddCustomerAddressR
         {
             return await CountryExists(address.CountryId);
         })
-        .WithMessage(x => $"The country does not exist."); 
+        .WithMessage(x => $"The country does not exist.");
     }
 
     protected async Task<bool> CountryExists(int id)
     {
         return await _countryRepository.ExistsAsync(id);
-    } 
+    }
 }
