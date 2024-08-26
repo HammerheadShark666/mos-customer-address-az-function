@@ -1,13 +1,13 @@
-﻿using Microservice.Customer.Address.Function.Data.Contexts;
+﻿using Microservice.Customer.Address.Function.Data.Context;
 using Microservice.Customer.Address.Function.Data.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.Customer.Address.Function.Data.Repository;
 
 public class CustomerAddressRepository(IDbContextFactory<CustomerAddressDbContext> dbContextFactory) : ICustomerAddressRepository
-{    
+{
     public IDbContextFactory<CustomerAddressDbContext> _dbContextFactory { get; set; } = dbContextFactory;
-  
+
     public async Task<Domain.CustomerAddress> AddAsync(Domain.CustomerAddress customerAddress)
     {
         await using var db = await _dbContextFactory.CreateDbContextAsync();

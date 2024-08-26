@@ -7,20 +7,20 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Newtonsoft.Json;
 
-namespace Microservice.Customer.Function.Test.Unit;
+namespace Microservice.Customer.Address.Function.Test.Unit;
 
 public class AddCustomerAddressFromRegisteredUserAzureFunctionTests
 {
     private readonly Mock<IMediator> _mockMediator;
     private readonly Mock<ILogger<AddCustomerAddressFromRegisteredUser>> _mockLogger;
-    private readonly AddCustomerAddressFromRegisteredUser _addCustomerAddressFromRegisteredUser; 
-    
+    private readonly AddCustomerAddressFromRegisteredUser _addCustomerAddressFromRegisteredUser;
+
     public AddCustomerAddressFromRegisteredUserAzureFunctionTests()
     {
         _mockMediator = new Mock<IMediator>();
         _mockLogger = new Mock<ILogger<AddCustomerAddressFromRegisteredUser>>();
         _addCustomerAddressFromRegisteredUser = new AddCustomerAddressFromRegisteredUser(_mockLogger.Object, _mockMediator.Object);
-    }     
+    }
 
     [Test]
     public async Task Azure_function_trigger_service_bus_recieve_return_succeed()
@@ -32,7 +32,7 @@ public class AddCustomerAddressFromRegisteredUserAzureFunctionTests
 
         var mockServiceBusMessageActions = new Mock<ServiceBusMessageActions>();
         mockServiceBusMessageActions.Setup(x => x.CompleteMessageAsync(mockMessage, CancellationToken.None)).Returns(Task.FromResult(true));
-          
-        await _addCustomerAddressFromRegisteredUser.Run(mockMessage, mockServiceBusMessageActions.Object);        
-    } 
+
+        await _addCustomerAddressFromRegisteredUser.Run(mockMessage, mockServiceBusMessageActions.Object);
+    }
 }
