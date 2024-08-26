@@ -52,7 +52,7 @@ jobs:
           popd
       
       - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v4
+        uses: Azure/functions-action@v1
         id: fa
         with:
           app-name: 'prod-func-registered-user-add-customer-address'
