@@ -15,9 +15,12 @@ public class ErrorHelperTests
 
         IEnumerable<String> actualResult = ErrorHelper.GetErrorMessages(GetValidationFailures(value1, value2));
 
-        Assert.That(actualResult.Count, Is.EqualTo(2));
-        Assert.That(actualResult.ElementAt(0), Is.EqualTo(value1));
-        Assert.That(actualResult.ElementAt(1), Is.EqualTo(value2));
+        Assert.Multiple(() =>
+        {
+            Assert.That(actualResult.Count, Is.EqualTo(2));
+            Assert.That(actualResult.ElementAt(0), Is.EqualTo(value1));
+            Assert.That(actualResult.ElementAt(1), Is.EqualTo(value2));
+        });
     }
 
     [Test]
@@ -31,7 +34,7 @@ public class ErrorHelperTests
         Assert.That(actualResult, Is.EqualTo("[\"value1\",\"value2\"]"));
     }
 
-    private IEnumerable<ValidationFailure> GetValidationFailures(params string[] validationFailureValues)
+    private static IEnumerable<ValidationFailure> GetValidationFailures(params string[] validationFailureValues)
     {
         var index = 1;
 

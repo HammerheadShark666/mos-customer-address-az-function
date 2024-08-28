@@ -1,4 +1,4 @@
-﻿namespace Microservice.Customer.AddressFunction.Helpers.Exceptions;
+﻿namespace Microservice.Customer.Address.Function.Helpers.Exceptions;
 
 public class CustomerAddressNotFoundException : Exception
 {
