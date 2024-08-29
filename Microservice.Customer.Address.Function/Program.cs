@@ -26,7 +26,8 @@ var host = new HostBuilder()
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
 
-        var configuration = services.BuildServiceProvider().GetService<IConfiguration>();
+        var configuration = services.BuildServiceProvider().GetService<IConfiguration>()
+                              ?? throw new Exception("Configuration not created.");
 
         services.AddValidatorsFromAssemblyContaining<AddCustomerAddressValidator>();
         services.AddMediatR(_ => _.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
