@@ -16,13 +16,7 @@ public class AddCustomerAddressFromRegisteredUser(ILogger<AddCustomerAddressFrom
                                              ServiceBusReceivedMessage message,
                                              ServiceBusMessageActions messageActions)
     {
-        AddCustomerAddressRequest? addCustomerAddressRequest = JsonHelper.GetRequest<AddCustomerAddressRequest>(message.Body.ToArray());
-
-        if (addCustomerAddressRequest == null)
-        {
-            logger.LogError("RegisteredUser - Error deserializing AddCustomerAddressRequest. {message}", message);
-            throw new JsonDeserializeException("Error deserializing AddCustomerAddressRequest.");
-        }
+        AddCustomerAddressRequest? addCustomerAddressRequest = JsonHelper.GetRequest<AddCustomerAddressRequest>(message.Body.ToArray()) ?? throw new JsonDeserializeException("Error deserializing AddCustomerAddressRequest.");
 
         try
         {
@@ -32,6 +26,11 @@ public class AddCustomerAddressFromRegisteredUser(ILogger<AddCustomerAddressFrom
             await messageActions.CompleteMessageAsync(message);
 
             return;
+        }
+        catch (JsonDeserializeException jsonDeserializeException)
+        {
+            logger.LogError("RegisteredUser - Error deserializing AddCustomerAddressRequest. {message}", message);
+            await messageActions.DeadLetterMessageAsync(message, null, jsonDeserializeException.Message);
         }
         catch (FluentValidation.ValidationException validationException)
         {

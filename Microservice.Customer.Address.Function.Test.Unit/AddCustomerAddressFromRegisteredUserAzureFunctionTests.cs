@@ -23,7 +23,7 @@ public class AddCustomerAddressFromRegisteredUserAzureFunctionTests
     }
 
     [Test]
-    public async Task Azure_function_trigger_service_bus_recieve_return_succeed()
+    public async Task Azure_function_trigger_service_bus_receive_return_succeed()
     {
         var addCustomerAddressRequest = new AddCustomerAddressRequest(Guid.NewGuid(), Guid.NewGuid(), "AddressLine1", "AddressLine2", "AddressLine3",
                                                                                    "TownCity1", "County1", "Pcode1", 1);
