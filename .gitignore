@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Microservice.Customer.Address.Function/Properties/ServiceDependencies/prod-func-reg-add-customer-adrs - Zip Deploy
+/Microservice.Customer.Address.Function/Properties/serviceDependencies.prod-func-reg-add-customer-adrs - Zip Deploy.json
+/Microservice.Customer.Address.Function/Properties/serviceDependencies.json
